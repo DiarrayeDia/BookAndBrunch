@@ -5,72 +5,44 @@
 	<!-- Main Content-->
 	<div class="container px-4 px-lg-5">
 		<div class="row gx-4 gx-lg-5 justify-content-center">
-			<div
-				class="col-md-10 col-lg-8 col-xl-7">
-				<!-- Post preview-->
-				<div class="post-preview">
-					<a href="post.html">
-						<h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-						<h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-					</a>
-					<p class="post-meta">
-						Posted by
-						<a href="#!">Start Bootstrap</a>
-						on September 24, 2021
-					</p>
-				</div>
-				<!-- Divider-->
-				<hr
-				class="my-4"/>
-				<!-- Post preview-->
-				<div class="post-preview">
-					<a href="post.html">
-						<h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2>
-					</a>
-					<p class="post-meta">
-						Posted by
-						<a href="#!">Start Bootstrap</a>
-						on September 18, 2021
-					</p>
-				</div>
-				<!-- Divider-->
-				<hr
-				class="my-4"/>
-				<!-- Post preview-->
-				<div class="post-preview">
-					<a href="post.html">
-						<h2 class="post-title">Science has not yet mastered prophecy</h2>
-						<h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
-					</a>
-					<p class="post-meta">
-						Posted by
-						<a href="#!">Start Bootstrap</a>
-						on August 24, 2021
-					</p>
-				</div>
-				<!-- Divider-->
-				<hr
-				class="my-4"/>
-				<!-- Post preview-->
-				<div class="post-preview">
-					<a href="post.html">
-						<h2 class="post-title">Failure is not an option</h2>
-						<h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-					</a>
-					<p class="post-meta">
-						Posted by
-						<a href="#!">Start Bootstrap</a>
-						on July 8, 2021
-					</p>
-				</div>
-				<!-- Divider-->
-				<hr
-				class="my-4"/>
-				<!-- Pager-->
-				<div class="d-flex justify-content-end mb-4">
-					<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-				</div>
+
+			<div class="row">
+				{% for book in books %}
+					<div
+						class="col-4">
+						<!-- Post preview-->
+						<div class="card mb-3">
+							<h3 class="card-header">{{book.title}}</h3>
+							<div class="card-body">
+								<h5 class="card-title">{{book.slug}}</h5>
+								<h6 class="card-subtitle text-muted">{{book.year}}</h6>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+								<rect width="100%" height="100%" fill="#868e96"></rect>
+								<text x="50%" y="50%" fill="#dee2e6" dy=".3em">{{book.cover}}</text>
+							</svg>
+							<div class="card-body">
+								<p class="card-text">{{book.summary}}</p>
+							</div>
+							<div class="card-body">
+								<a href="#" class="card-link">Card link</a>
+								<a href="#" class="card-link">Another link</a>
+							</div>
+							<div class="card-footer text-muted">
+								2 days ago
+							</div>
+							<!-- Divider-->
+							<hr
+							class="my-4"/>
+							<!-- Pager-->
+							<div class="d-flex justify-content-end mb-4">
+								<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
 			</div>
+
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}

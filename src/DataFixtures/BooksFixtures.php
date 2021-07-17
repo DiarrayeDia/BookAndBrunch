@@ -15,12 +15,10 @@ class BooksFixtures extends Fixture
         for ($nbBooks = 1; $nbBooks < 6; $nbBooks++) {
             $book = new Books();
             $book->setTitle($faker->realText(25));
-            $book->setYear($year);
+            $book->setYear($faker->year);
             $book->setSummary($faker->text(500));
-            $book->setPhoto($photo);
             $book->setSlug($faker->slug);
             $book->setCover($faker->image('public/clean/assets/covers'));
-            $book->addAuthor($author);
             $manager->persist($book);
         }
         $manager->flush();

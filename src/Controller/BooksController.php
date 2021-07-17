@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Books;
+use App\Repository\BooksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +13,12 @@ class BooksController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(): Response
+    public function home(BooksRepository $booksRepository): Response
     {
+        $books = $booksRepository->findAll();
+
         return $this->render('books/index.html.twig', [
-            'controller_name' => 'BooksController',
+            'books' => $books,
         ]);
     }
 
