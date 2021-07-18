@@ -27,6 +27,17 @@ class Comments
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $written_by;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Books::class, inversedBy="comments")
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +63,30 @@ class Comments
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getWrittenBy(): ?User
+    {
+        return $this->written_by;
+    }
+
+    public function setWrittenBy(?User $written_by): self
+    {
+        $this->written_by = $written_by;
+
+        return $this;
+    }
+
+    public function getBook(): ?Books
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Books $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

@@ -55,9 +55,15 @@ class Books
      */
     private $author;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="book")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,6 +163,36 @@ class Books
     public function removeAuthor(Authors $author): self
     {
         $this->author->removeElement($author);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getBook() === $this) {
+                $comment->setBook(null);
+            }
+        }
 
         return $this;
     }
