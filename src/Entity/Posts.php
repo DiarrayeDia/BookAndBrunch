@@ -49,6 +49,11 @@ class Posts
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Yearbooks::class, inversedBy="posts")
+     */
+    private $yearbook;
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
@@ -145,6 +150,18 @@ class Posts
                 $comment->setPosts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getYearbook(): ?Yearbooks
+    {
+        return $this->yearbook;
+    }
+
+    public function setYearbook(?Yearbooks $yearbook): self
+    {
+        $this->yearbook = $yearbook;
 
         return $this;
     }
