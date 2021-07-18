@@ -65,10 +65,16 @@ class Books
      */
     private $bookshelf;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="books")
+     */
+    private $genres;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +216,33 @@ class Books
     public function setBookshelf(?Bookshelf $bookshelf): self
     {
         $this->bookshelf = $bookshelf;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+            $genre->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        if ($this->genres->removeElement($genre)) {
+            $genre->removeBook($this);
+        }
 
         return $this;
     }
