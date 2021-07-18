@@ -48,9 +48,21 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Events::class, mappedBy="creator")
+     */
+    private $events_created;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Events::class, mappedBy="participant")
+     */
+    private $events_attended;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->events_created = new ArrayCollection();
+        $this->events_attended = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -171,6 +183,63 @@ class User implements UserInterface
             if ($comment->getWrittenBy() === $this) {
                 $comment->setWrittenBy(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Events[]
+     */
+    public function getEventsCreated(): Collection
+    {
+        return $this->events_created;
+    }
+
+    public function addEventsCreated(Events $eventsCreated): self
+    {
+        if (!$this->events_created->contains($eventsCreated)) {
+            $this->events_created[] = $eventsCreated;
+            $eventsCreated->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventsCreated(Events $eventsCreated): self
+    {
+        if ($this->events_created->removeElement($eventsCreated)) {
+            // set the owning side to null (unless already changed)
+            if ($eventsCreated->getCreator() === $this) {
+                $eventsCreated->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Events[]
+     */
+    public function getEventsAttended(): Collection
+    {
+        return $this->events_attended;
+    }
+
+    public function addEventsAttended(Events $eventsAttended): self
+    {
+        if (!$this->events_attended->contains($eventsAttended)) {
+            $this->events_attended[] = $eventsAttended;
+            $eventsAttended->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventsAttended(Events $eventsAttended): self
+    {
+        if ($this->events_attended->removeElement($eventsAttended)) {
+            $eventsAttended->removeParticipant($this);
         }
 
         return $this;
