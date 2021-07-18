@@ -60,6 +60,11 @@ class Books
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Bookshelf::class, inversedBy="books")
+     */
+    private $bookshelf;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
@@ -193,6 +198,18 @@ class Books
                 $comment->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBookshelf(): ?Bookshelf
+    {
+        return $this->bookshelf;
+    }
+
+    public function setBookshelf(?Bookshelf $bookshelf): self
+    {
+        $this->bookshelf = $bookshelf;
 
         return $this;
     }
