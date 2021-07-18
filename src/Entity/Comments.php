@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
+use App\Entity\Posts;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentsRepository;
 
 /**
  * @ORM\Entity(repositoryClass=CommentsRepository::class)

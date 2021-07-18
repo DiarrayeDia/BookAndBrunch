@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\BooksRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Genre;
+use App\Entity\Comments;
+use App\Entity\Bookshelf;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BooksRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=BooksRepository::class)
@@ -30,6 +34,7 @@ class Books
     private $year;
 
     /**
+     * @gedmo\Slug(fields={"firstname", "lastname"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
@@ -115,13 +120,6 @@ class Books
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getSummary(): ?string

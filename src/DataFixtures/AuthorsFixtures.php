@@ -20,7 +20,7 @@ class AuthorsFixtures extends Fixture
             $author->setBiography($faker->text(500));
             $author->setPhoto($faker->image());
             $author->setCountry($faker->country());
-            $author->setSlug($faker->slug);
+            //$author->setSlug($faker->slug);
             $manager->persist($author);
         }
         $manager->flush();
