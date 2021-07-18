@@ -17,8 +17,8 @@ class BooksFixtures extends Fixture
             $book->setTitle($faker->realText(25));
             $book->setYear($faker->year);
             $book->setSummary($faker->text(500));
-            $book->setSlug($faker->slug);
-            $book->setCover($faker->image('public/clean/assets/covers'));
+            /*             $book->setSlug($faker->slug);
+            $book->setCover($faker->image('public/clean/assets/covers')); */
             $manager->persist($book);
         }
         $manager->flush();

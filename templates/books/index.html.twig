@@ -17,32 +17,32 @@
 								<h5 class="card-title">{{book.slug}}</h5>
 								<h6 class="card-subtitle text-muted">{{book.year}}</h6>
 							</div>
-							<svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-								<rect width="100%" height="100%" fill="#868e96"></rect>
-								<text x="50%" y="50%" fill="#dee2e6" dy=".3em">{{book.cover}}</text>
-							</svg>
+
+							<img src="{{ asset('clean/covers/queenie.jpeg') }}"/>
+
 							<div class="card-body">
 								<p class="card-text">{{book.summary}}</p>
 							</div>
 							<div class="card-body">
-								<a href="#" class="card-link">Card link</a>
+								<a href="{{path('book_view', {id: 28})}}" class="card-link">Card link</a>
 								<a href="#" class="card-link">Another link</a>
 							</div>
 							<div class="card-footer text-muted">
 								2 days ago
 							</div>
 							<!-- Divider-->
-							<hr
-							class="my-4"/>
-							<!-- Pager-->
-							<div class="d-flex justify-content-end mb-4">
-								<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-							</div>
+
 						</div>
+
 					</div>
 				{% endfor %}
+				<!-- Pager-->
+				<div class="d-flex justify-content-end mb-4">
+					<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
+				</div>
 
 			</div>
 
 		</div>
-	{% endblock %}
+	</div>
+{% endblock %}
