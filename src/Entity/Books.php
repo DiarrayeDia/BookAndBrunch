@@ -70,11 +70,17 @@ class Books
      */
     private $genres;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="books")
+     */
+    private $areas;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->areas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +248,33 @@ class Books
     {
         if ($this->genres->removeElement($genre)) {
             $genre->removeBook($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Area[]
+     */
+    public function getAreas(): Collection
+    {
+        return $this->areas;
+    }
+
+    public function addArea(Area $area): self
+    {
+        if (!$this->areas->contains($area)) {
+            $this->areas[] = $area;
+            $area->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArea(Area $area): self
+    {
+        if ($this->areas->removeElement($area)) {
+            $area->removeBook($this);
         }
 
         return $this;
