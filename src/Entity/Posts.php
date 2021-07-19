@@ -37,7 +37,7 @@ class Posts
     private $image;
 
     /**
-     * @gedmo\Slug(fields={"name"})
+     * @gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;

@@ -12,16 +12,17 @@
 						class="col-4">
 						<!-- Post preview-->
 						<div class="card mb-3">
-							<h3 class="card-header">{{book.title}}</h3>
+							<h3 class="card-header">
+								Title</h3>
 							<div class="card-body">
-								<h5 class="card-title">{{book.slug}}</h5>
-								<h6 class="card-subtitle text-muted">{{book.year}}</h6>
+								<h5 class="card-title">Author</h5>
+								<h6 class="card-subtitle text-muted">year</h6>
 							</div>
 
 							<img src="{{ asset('clean/covers/queenie.jpeg') }}"/>
 
 							<div class="card-body">
-								<p class="card-text">{{book.summary}}</p>
+								<p class="card-text">Summary</p>
 							</div>
 							<div class="card-body">
 								<a href="{{path('book_view', {id: 28})}}" class="card-link">Card link</a>
@@ -35,14 +36,16 @@
 						</div>
 
 					</div>
+
 				{% endfor %}
-				<!-- Pager-->
-				<div class="d-flex justify-content-end mb-4">
-					<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-				</div>
+			</div>
+			<!-- Pager-->
+			<div class="d-flex justify-content-end mb-4">
+				<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
 
 			</div>
-
 		</div>
+
 	</div>
+
 {% endblock %}

@@ -34,7 +34,7 @@ class Books
     private $year;
 
     /**
-     * @gedmo\Slug(fields={"firstname", "lastname"})
+     * @gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
