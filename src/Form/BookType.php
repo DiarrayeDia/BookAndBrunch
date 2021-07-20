@@ -8,9 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookType extends AbstractType
@@ -33,14 +33,14 @@ class BookType extends AbstractType
             ])
             ->add(
                 'translation',
-                ChoiceType::class,
+                CheckboxType::class,
                 [
                     'label' => "Traduit en Français"
                 ],
                 ['choix' => [
                     'Oui' => true,
                     'Non' => false,
-                ],]
+                ], 'expanded' => true,]
             )
             ->add('author', TextType::class, [
                 'label' => "Auteur.e"
