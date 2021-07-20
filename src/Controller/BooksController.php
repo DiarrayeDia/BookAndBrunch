@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Books;
+use App\Entity\Bookshelf;
+use App\Form\BookshelfType;
 use App\Repository\BooksRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BooksController extends AbstractController
 {
@@ -29,6 +31,25 @@ class BooksController extends AbstractController
     {
         return $this->render('books/book_view.html.twig', [
             'controller_name' => 'BooksController',
+        ]);
+    }
+    /**
+     * @Route("/bookshelf/add", name="bookshelf_add")
+     */
+    public function add_bookshelf(Request $request): Response
+    {
+        $bookshelf = new Bookshelf();
+        $bookshelfform = $this->createForm(BookshelfType::class, $bookshelf);
+        $bookshelfform->handleRequest($request);
+        if ($bookshelfform->isSubmitted() && $bookshelfform->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($bookshelf);
+            $em->flush();
+            $this->addFlash('success', 'Votre étagère a été ajoutée avec succès !');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('admin/bookshelf/add.html.twig', [
+            'form' => $bookshelfform->createView(),
         ]);
     }
 }
