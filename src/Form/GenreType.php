@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Area;
+use App\Entity\Genre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class AreaType extends AbstractType
+class GenreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,7 +17,6 @@ class AreaType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => "Nom "
             ])
-            // ->add('parent')
             // ->add('books')
             ->add('Valider', SubmitType::class);
     }
@@ -25,7 +24,7 @@ class AreaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Area::class,
+            'data_class' => Genre::class,
         ]);
     }
 }
