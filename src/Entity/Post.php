@@ -2,17 +2,18 @@
 
 namespace App\Entity;
 
-use App\Entity\Yearbooks;
+use App\Entity\Yearbook;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\PostsRepository;
+use App\Repository\PostRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\Entity;
 
 /**
- * @ORM\Entity(repositoryClass=PostsRepository::class)
+ * @ORM\Entity(repositoryClass=PostRepository::class)
  */
-class Posts
+class Post
 {
     /**
      * @ORM\Id
@@ -22,6 +23,7 @@ class Posts
     private $id;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $date;
@@ -132,7 +134,7 @@ class Posts
     {
         if (!$this->comment->contains($comment)) {
             $this->comment[] = $comment;
-            $comment->setPosts($this);
+            $comment->setPost($this);
         }
 
         return $this;
@@ -142,8 +144,8 @@ class Posts
     {
         if ($this->comment->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getPosts() === $this) {
-                $comment->setPosts(null);
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
             }
         }
 

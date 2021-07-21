@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Yearbooks;
+use App\Entity\Yearbook;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Yearbooks|null find($id, $lockMode = null, $lockVersion = null)
- * @method Yearbooks|null findOneBy(array $criteria, array $orderBy = null)
- * @method Yearbooks[]    findAll()
- * @method Yearbooks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Yearbook|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Yearbook|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Yearbook[]    findAll()
+ * @method Yearbook[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class YearbooksRepository extends ServiceEntityRepository
+class YearbookRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Yearbooks::class);
+        parent::__construct($registry, Yearbook::class);
     }
 
     // /**
-    //  * @return Yearbooks[] Returns an array of Yearbooks objects
+    //  * @return Yearbook[] Returns an array of Yearbook objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class YearbooksRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Yearbooks
+    public function findOneBySomeField($value): ?Yearbook
     {
         return $this->createQueryBuilder('y')
             ->andWhere('y.exampleField = :val')

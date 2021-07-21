@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\AuthorsRepository;
+use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=AuthorsRepository::class)
+ * @ORM\Entity(repositoryClass=AuthorRepository::class)
  */
-class Authors
+class Author
 {
     /**
      * @ORM\Id
@@ -52,7 +52,7 @@ class Authors
     private $photo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Books::class, mappedBy="author")
+     * @ORM\ManyToMany(targetEntity=Book::class, mappedBy="author")
      */
     private $books;
 
@@ -132,26 +132,26 @@ class Authors
     }
 
     /**
-     * @return Collection|Books[]
+     * @return Collection|Book[]
      */
-    public function getBooks(): Collection
+    public function getBook(): Collection
     {
-        return $this->books;
+        return $this->book;
     }
 
-    public function addBook(Books $book): self
+    public function addBook(Book $book): self
     {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
+        if (!$this->book->contains($book)) {
+            $this->book[] = $book;
             $book->addAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeBook(Books $book): self
+    public function removeBook(Book $book): self
     {
-        if ($this->books->removeElement($book)) {
+        if ($this->book->removeElement($book)) {
             $book->removeAuthor($this);
         }
 

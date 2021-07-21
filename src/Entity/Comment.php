@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Entity\Posts;
+use App\Entity\Post;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CommentsRepository;
+use App\Repository\CommentRepository;
 
 /**
- * @ORM\Entity(repositoryClass=CommentsRepository::class)
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 class Comments
 {
@@ -29,18 +29,18 @@ class Comments
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
      * @ORM\JoinColumn(nullable=false)
      */
     private $written_by;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Books::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="comment")
      */
     private $book;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Posts::class, inversedBy="comment")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comment")
      */
     private $posts;
 
@@ -85,26 +85,26 @@ class Comments
         return $this;
     }
 
-    public function getBook(): ?Books
+    public function getBook(): ?Book
     {
         return $this->book;
     }
 
-    public function setBook(?Books $book): self
+    public function setBook(?Book $book): self
     {
         $this->book = $book;
 
         return $this;
     }
 
-    public function getPosts(): ?Posts
+    public function getPost(): ?Post
     {
-        return $this->posts;
+        return $this->post;
     }
 
-    public function setPosts(?Posts $posts): self
+    public function setPost(?Post $post): self
     {
-        $this->posts = $posts;
+        $this->post = $post;
 
         return $this;
     }

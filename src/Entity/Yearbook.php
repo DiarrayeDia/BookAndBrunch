@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\YearbooksRepository;
+use App\Repository\YearbookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=YearbooksRepository::class)
+ * @ORM\Entity(repositoryClass=YearbookRepository::class)
  */
-class Yearbooks
+class Yearbook
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Yearbooks
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=Posts::class, mappedBy="yearbook")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="yearbook")
      */
     private $posts;
 
@@ -52,14 +52,14 @@ class Yearbooks
     }
 
     /**
-     * @return Collection|Posts[]
+     * @return Collection|Post[]
      */
-    public function getPosts(): Collection
+    public function getPost(): Collection
     {
         return $this->posts;
     }
 
-    public function addPost(Posts $post): self
+    public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
@@ -69,7 +69,7 @@ class Yearbooks
         return $this;
     }
 
-    public function removePost(Posts $post): self
+    public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)

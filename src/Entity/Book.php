@@ -3,18 +3,18 @@
 namespace App\Entity;
 
 use App\Entity\Genre;
-use App\Entity\Comments;
+use App\Entity\Comment;
 use App\Entity\Bookshelf;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\BooksRepository;
+use App\Repository\BookRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=BooksRepository::class)
+ * @ORM\Entity(repositoryClass=BookRepository::class)
  */
-class Books
+class Book
 {
     /**
      * @ORM\Id
@@ -55,34 +55,34 @@ class Books
     private $translation;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Authors::class, inversedBy="books", cascade={"persist"})
-     * @ORM\JoinTable(name="books_authors")
+     * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="book", cascade={"persist"})
+     * @ORM\JoinTable(name="book_author")
      */
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="book")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
      */
-    private $comments;
+    private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Bookshelf::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Bookshelf::class, inversedBy="book")
      */
     private $bookshelf;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="books")
+     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="book")
      */
-    private $genres;
+    private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="books")
+     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="book")
      */
-    private $areas;
+    private $area;
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+        $this->authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->areas = new ArrayCollection();
@@ -159,38 +159,38 @@ class Books
     }
 
     /**
-     * @return Collection|Authors[]
+     * @return Collection|Author[]
      */
     public function getAuthor(): Collection
     {
-        return $this->author;
+        return $this->authors;
     }
 
-    public function addAuthor(Authors $author): self
+    public function addAuthor(Author $author): self
     {
-        if (!$this->author->contains($author)) {
-            $this->author[] = $author;
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
         }
 
         return $this;
     }
 
-    public function removeAuthor(Authors $author): self
+    public function removeAuthor(Author $author): self
     {
-        $this->author->removeElement($author);
+        $this->authors->removeElement($author);
 
         return $this;
     }
 
     /**
-     * @return Collection|Comments[]
+     * @return Collection|Comment[]
      */
-    public function getComments(): Collection
+    public function getComment(): Collection
     {
-        return $this->comments;
+        return $this->comment;
     }
 
-    public function addComment(Comments $comment): self
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -200,7 +200,7 @@ class Books
         return $this;
     }
 
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comment $comment): self
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)

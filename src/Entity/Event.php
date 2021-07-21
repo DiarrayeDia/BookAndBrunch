@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\EventsRepository;
+use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EventsRepository::class)
+ * @ORM\Entity(repositoryClass=EventRepository::class)
  */
-class Events
+class Event
 {
     /**
      * @ORM\Id
@@ -40,12 +40,12 @@ class Events
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events_created")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="event_created")
      */
     private $creator;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events_attended")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="event_attended")
      */
     private $participant;
 
