@@ -42,7 +42,7 @@ class Area
     private $areas;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Books::class, inversedBy="areas")
+     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="areas")
      */
     private $books;
 
@@ -124,7 +124,7 @@ class Area
         return $this->books;
     }
 
-    public function addBook(Books $book): self
+    public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
@@ -133,7 +133,7 @@ class Area
         return $this;
     }
 
-    public function removeBook(Books $book): self
+    public function removeBook(Book $book): self
     {
         $this->books->removeElement($book);
 

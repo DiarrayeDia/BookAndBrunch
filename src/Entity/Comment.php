@@ -9,7 +9,7 @@ use App\Repository\CommentRepository;
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Comments
+class Comment
 {
     /**
      * @ORM\Id

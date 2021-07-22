@@ -3,14 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Area;
-use App\Entity\Books;
+use App\Entity\Book;
 use App\Entity\Genre;
-use App\Entity\Posts;
-use App\Entity\Events;
+use App\Entity\Post;
+use App\Entity\Event;
 use App\Form\AreaType;
 use App\Form\BookType;
 use App\Form\PostType;
-use App\Entity\Authors;
+use App\Entity\Author;
 use App\Form\EventType;
 use App\Form\GenreType;
 use App\Form\AuthorType;
@@ -36,7 +36,7 @@ class AdminController extends AbstractController
      */
     public function addBook(Request $request): Response
     {
-        $book = new Books();
+        $book = new Book();
         $bookform = $this->createForm(BookType::class, $book);
         $bookform->handleRequest($request);
         if ($bookform->isSubmitted() && $bookform->isValid()) {
@@ -56,7 +56,7 @@ class AdminController extends AbstractController
      */
     public function addAuthor(Request $request): Response
     {
-        $author = new Authors();
+        $author = new Author();
         $authorform = $this->createForm(AuthorType::class, $author);
         $authorform->handleRequest($request);
         if ($authorform->isSubmitted() && $authorform->isValid()) {
@@ -117,7 +117,7 @@ class AdminController extends AbstractController
      */
     public function addPost(Request $request): Response
     {
-        $post = new Posts();
+        $post = new Post();
         $postform = $this->createForm(PostType::class, $post);
         $postform->handleRequest($request);
         if ($postform->isSubmitted() && $postform->isValid()) {
@@ -137,7 +137,7 @@ class AdminController extends AbstractController
      */
     public function addEvent(Request $request): Response
     {
-        $event = new Events();
+        $event = new Event();
         $eventform = $this->createForm(EventType::class, $event);
         $eventform->handleRequest($request);
         if ($eventform->isSubmitted() && $eventform->isValid()) {

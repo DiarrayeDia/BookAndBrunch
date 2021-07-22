@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bookshelf;
 use App\Form\BookshelfType;
-use App\Repository\BooksRepository;
+use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +15,9 @@ class BooksController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(BooksRepository $booksRepository): Response
+    public function home(BookRepository $bookRepository): Response
     {
-        $books = $booksRepository->findAll();
+        $books = $bookRepository->findAll();
 
         return $this->render('books/index.html.twig', [
             'books' => $books,

@@ -35,9 +35,9 @@ class Bookshelf
     private $photos;
 
     /**
-     * @ORM\OneToMany(targetEntity=Books::class, mappedBy="bookshelf")
+     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="bookshelf")
      */
-    private $books;
+    private $book;
 
     public function __construct()
     {
@@ -93,7 +93,7 @@ class Bookshelf
         return $this->books;
     }
 
-    public function addBook(Books $book): self
+    public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
@@ -103,7 +103,7 @@ class Bookshelf
         return $this;
     }
 
-    public function removeBook(Books $book): self
+    public function removeBook(Book $book): self
     {
         if ($this->books->removeElement($book)) {
             // set the owning side to null (unless already changed)
