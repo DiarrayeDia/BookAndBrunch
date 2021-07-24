@@ -6,6 +6,8 @@ use App\Entity\Bookshelf;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class BookshelfType extends AbstractType
@@ -17,8 +19,9 @@ class BookshelfType extends AbstractType
                 'label' => "Saison"
             ])
             // ->add('month')
-            // ->add('photos')
-        ;
+            ->add('books')
+            ->add('photos', FileType::class)
+            ->add('Valider', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

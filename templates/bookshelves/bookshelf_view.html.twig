@@ -1,0 +1,57 @@
+{% extends 'clean.html.twig' %}
+
+{% block title %}
+	Nos étagères
+{% endblock %}
+
+
+{% block body %}
+	<!-- Main Content-->
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+
+
+			<div class="row">
+				{% for i in 0..10 %}
+					{# {% for bookshelf in bookshelves %} #}
+					<div
+						class="col-4">
+						<!-- Post preview-->
+						<div class="card mb-3">
+							<h3 class="card-header">
+								Saison</h3>
+							<div class="card-body">
+								<h5 class="card-title">2020</h5>
+
+							</div>
+
+							<div class="card-body">
+								<p class="card-text">Liste des livres lus en 2020</p>
+							</div>
+							<div class="card-body">
+								<a href="" class="card-link">Card link</a>
+								<a href="#" class="card-link">Another link</a>
+							</div>
+							<div class="card-footer text-muted">
+								2 days ago
+							</div>
+							<!-- Divider-->
+
+						</div>
+
+					</div>
+
+					{# {% endfor %} #}
+				{% endfor %}
+			</div>
+
+			<!-- Pager-->
+			<div class="d-flex justify-content-end mb-4">
+				<a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
+
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}

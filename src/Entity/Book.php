@@ -58,7 +58,7 @@ class Book
      * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="book", cascade={"persist"})
      * @ORM\JoinTable(name="book_author")
      */
-    private $author;
+    private $authors;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
@@ -73,12 +73,12 @@ class Book
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="book")
      */
-    private $genre;
+    private $genres;
 
     /**
      * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="book")
      */
-    private $area;
+    private $areas;
 
     public function __construct()
     {

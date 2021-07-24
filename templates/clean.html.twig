@@ -42,6 +42,9 @@
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="{{path('book_view', {id: 28})}}">Le livre du mois</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link px-lg-3 py-3 py-lg-4" href="{{path('bookshelf_view')}}">Nos étagères</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a>
 						</li>
 						{% if not is_granted("ROLE_USER") %}
@@ -52,9 +55,6 @@
 								<a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('app_login') }}">Connexion</a>
 							</li>
 						{% else %}
-							<li class="nav-item">
-								<a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('book_add') }}">Ajouter un nouveau livre</a>
-							</li>
 							<li class="nav-item">
 								<a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ path('app_logout') }}">Déconnexion</a>
 							</li>

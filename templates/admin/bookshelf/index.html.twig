@@ -1,0 +1,64 @@
+{% extends 'admin/backoffice.html.twig' %}
+
+{% block title %}Gestion des Etagères
+{% endblock %}
+
+{% block body %}
+	<h1>Gestion des Etagères</h1>
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4">Tables</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">
+					<a href="{{path('admin_index')}}">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active">Tables</li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i>
+					DataTable Example
+				</div>
+				<div class="card-body">
+					<table id="datatablesSimple">
+						<div class="card-body">
+							<a href="{{ path('bookshelf_add') }}" class="btn btn-primary">Ajouter</a>
+						</div>
+						<thead>
+							<tr>
+								<th>Année</th>
+								<th>Livres</th>
+								<th>Photos</th>
+
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Année</th>
+								<th>Livres</th>
+								<th>Photos</th>
+
+							</tr>
+						</tfoot>
+						<tbody>
+
+							{% for bookshelf in bookshelves %}
+								<tr>
+									<td>{{ bookshelf.year}}</td>
+									<td>{{ bookshelf.books}}</td>
+									<td>{{ bookshelf.photos}}</td>
+
+									<td>
+										<a href="{{ path('bookshelf_update', {id: bookshelf.id}) }}" class="btn btn-primary">Modifier</a>
+										<a href="{{ path('bookshelf_delete', {id: bookshelf.id}) }}" class="btn btn-danger">Supprimer</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+{% block javascripts %}{% endblock %}

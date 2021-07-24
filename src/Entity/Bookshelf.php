@@ -37,7 +37,7 @@ class Bookshelf
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="bookshelf")
      */
-    private $book;
+    private $books;
 
     public function __construct()
     {
