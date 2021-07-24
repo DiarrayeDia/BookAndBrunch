@@ -1,0 +1,81 @@
+{% extends 'admin/backoffice.html.twig' %}
+
+{% block title %}Gestion des livres
+{% endblock %}
+
+{% block body %}
+	<h1>Gestion des livres</h1>
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4">Tables</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">
+					<a href="{{path('admin_index')}}">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active">Tables</li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i>
+					DataTable Example
+				</div>
+				<div class="card-body">
+					<table id="datatablesSimple">
+						<div class="card-body">
+							<a href="{{ path('book_add') }}" class="btn btn-primary">Ajouter</a>
+						</div>
+						<thead>
+							<tr>
+								<th>Titre</th>
+								<th>Année</th>
+								<th>Auteur.e</th>
+								<th>Résumé</th>
+								<th>Couverture</th>
+								<th>Traduction</th>
+								<th>Bookshelf</th>
+								<th>Genre</th>
+								<th>Zone</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Titre</th>
+								<th>Année</th>
+								<th>Auteur.e</th>
+								<th>Résumé</th>
+								<th>Couverture</th>
+								<th>Traduction</th>
+								<th>Bookshelf</th>
+								<th>Genre</th>
+								<th>Zone</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+						<tbody>
+
+							{% for book in books %}
+								<tr>
+									<td>{{ book.title }}</td>
+									<td>{{ book.year}}</td>
+									<td>{{ book.author}}</td>
+									<td>{{ book.summary }}</td>
+									<td>{{ book.cover}}</td>
+									<td>{{ book.translation}}</td>
+									<td>{{ book.bookshelf}}</td>
+									<td>{{ book.genre}}</td>
+									<td>{{book.area}}</td>
+									<td>
+										<a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary">Modifier</a>
+										<a href="{{ path('book_delete', {id: book.id}) }}" class="btn btn-danger">Supprimer</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+{% block javascripts %}{% endblock %}

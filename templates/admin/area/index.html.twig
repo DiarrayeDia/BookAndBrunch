@@ -10,7 +10,7 @@
 			<h1 class="mt-4">Tables</h1>
 			<ol class="breadcrumb mb-4">
 				<li class="breadcrumb-item">
-					<a href="index.html">Dashboard</a>
+					<a href="{{path('admin_index')}}">Dashboard</a>
 				</li>
 				<li class="breadcrumb-item active">Tables</li>
 			</ol>
@@ -52,7 +52,7 @@
 									<td>Livres</td>
 									<td>
 										<a href="{{ path('area_update', {id: area.id}) }}" class="btn btn-primary">Modifier</a>
-										<a href="{{ path('area_delete', {id: area.id}) }}" class="btn btn-danger btn-sm modal-trigger">Supprimer</a>
+										<a href="{{ path('area_delete', {id: area.id}) }}" class="btn btn-danger">Supprimer</a>
 									</td>
 								</tr>
 							{% endfor %}
@@ -62,23 +62,5 @@
 			</div>
 		</div>
 	</main>
-	<!-- Modal -->
-	<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Supprimer un article</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					...
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-					<a href="" class="btn btn-primary">Supprimer</a>
-				</div>
-			</div>
-		</div>
-	</div>
 {% endblock %}
 {% block javascripts %}{% endblock %}

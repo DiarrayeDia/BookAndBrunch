@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin_home")
+     * @Route("/admin", name="admin_index")
      */
     public function index(): Response
     {
