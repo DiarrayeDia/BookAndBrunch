@@ -17,7 +17,7 @@ class AreaType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => "Nom "
             ])
-            // ->add('parent')
+            ->add('parent')
             // ->add('books')
             ->add('Valider', SubmitType::class);
     }

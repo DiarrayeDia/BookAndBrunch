@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Bookshelf;
-use App\Form\BookshelfType;
+use App\Entity\Book;
+use App\Form\BookType;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,23 +33,25 @@ class BooksController extends AbstractController
             'controller_name' => 'BooksController',
         ]);
     }
+
+
     /**
-     * @Route("/bookshelf/add", name="bookshelf_add")
+     * @Route("/admin/book/add", name="book_add")
      */
-    public function add_bookshelf(Request $request): Response
+    public function addBook(Request $request): Response
     {
-        $bookshelf = new Bookshelf();
-        $bookshelfform = $this->createForm(BookshelfType::class, $bookshelf);
-        $bookshelfform->handleRequest($request);
-        if ($bookshelfform->isSubmitted() && $bookshelfform->isValid()) {
+        $book = new Book();
+        $bookform = $this->createForm(BookType::class, $book);
+        $bookform->handleRequest($request);
+        if ($bookform->isSubmitted() && $bookform->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($bookshelf);
+            $em->persist($book);
             $em->flush();
-            $this->addFlash('success', 'Votre étagère a été ajoutée avec succès !');
-            return $this->redirectToRoute('home');
+            $this->addFlash('success', 'Votre livre a été ajouté avec succès !');
+            return $this->redirectToRoute('admin_home');
         }
-        return $this->render('admin/bookshelf/add.html.twig', [
-            'form' => $bookshelfform->createView(),
+        return $this->render('admin/book/add.html.twig', [
+            'form' => $bookform->createView(),
         ]);
     }
 }

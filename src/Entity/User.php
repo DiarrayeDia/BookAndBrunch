@@ -44,17 +44,17 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="written_by")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="written_by")
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Events::class, mappedBy="creator")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator")
      */
     private $events_created;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Events::class, mappedBy="participant")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participant")
      */
     private $events_attended;
 
@@ -166,7 +166,7 @@ class User implements UserInterface
         return $this->comments;
     }
 
-    public function addComment(Comments $comment): self
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -176,7 +176,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comment $comment): self
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
@@ -196,7 +196,7 @@ class User implements UserInterface
         return $this->events_created;
     }
 
-    public function addEventsCreated(Events $eventsCreated): self
+    public function addEventsCreated(Event $eventsCreated): self
     {
         if (!$this->events_created->contains($eventsCreated)) {
             $this->events_created[] = $eventsCreated;
@@ -206,7 +206,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeEventsCreated(Events $eventsCreated): self
+    public function removeEventsCreated(Event $eventsCreated): self
     {
         if ($this->events_created->removeElement($eventsCreated)) {
             // set the owning side to null (unless already changed)
@@ -226,7 +226,7 @@ class User implements UserInterface
         return $this->events_attended;
     }
 
-    public function addEventsAttended(Events $eventsAttended): self
+    public function addEventsAttended(Event $eventsAttended): self
     {
         if (!$this->events_attended->contains($eventsAttended)) {
             $this->events_attended[] = $eventsAttended;
@@ -236,7 +236,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeEventsAttended(Events $eventsAttended): self
+    public function removeEventsAttended(Event $eventsAttended): self
     {
         if ($this->events_attended->removeElement($eventsAttended)) {
             $eventsAttended->removeParticipant($this);

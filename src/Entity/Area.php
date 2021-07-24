@@ -51,6 +51,10 @@ class Area
         $this->areas = new ArrayCollection();
         $this->books = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

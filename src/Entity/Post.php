@@ -8,7 +8,6 @@ use App\Repository\PostRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\Entity;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -50,12 +49,12 @@ class Post
     private $content;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="posts")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="posts")
      */
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Yearbooks::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=Yearbook::class, inversedBy="posts")
      */
     private $yearbook;
 
@@ -130,7 +129,7 @@ class Post
         return $this->comment;
     }
 
-    public function addComment(Comments $comment): self
+    public function addComment(Comment $comment): self
     {
         if (!$this->comment->contains($comment)) {
             $this->comment[] = $comment;
@@ -140,7 +139,7 @@ class Post
         return $this;
     }
 
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comment $comment): self
     {
         if ($this->comment->removeElement($comment)) {
             // set the owning side to null (unless already changed)
@@ -152,12 +151,12 @@ class Post
         return $this;
     }
 
-    public function getYearbook(): ?Yearbooks
+    public function getYearbook(): ?Yearbook
     {
         return $this->yearbook;
     }
 
-    public function setYearbook(?Yearbooks $yearbook): self
+    public function setYearbook(?Yearbook $yearbook): self
     {
         $this->yearbook = $yearbook;
 
