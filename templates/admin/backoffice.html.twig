@@ -18,7 +18,7 @@
 		<nav
 			class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 			<!-- Navbar Brand-->
-			<a class="navbar-brand ps-3" href="{{path('home')}}">Accueil Book And Brunch</a>
+			<a class="navbar-brand ps-3" href="{{path('home')}}">Accueil BookAndBrunch</a>
 			<!-- Sidebar Toggle-->
 			<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
 				<i class="fas fa-bars"></i>
@@ -72,7 +72,7 @@
 								</div>
 								Zones géographiques
 							</a>
-							<a class="nav-link" href="{{path('admin_index')}}">
+							<a class="nav-link" href="{{path('genre_index')}}">
 								<div class="sb-nav-link-icon">
 									<i class=""></i>
 								</div>
@@ -85,7 +85,7 @@
 								</div>
 								Livres
 							</a>
-							<a class="nav-link" href="{{path('admin_index')}}">
+							<a class="nav-link" href="{{path('author_index')}}">
 								<div class="sb-nav-link-icon">
 									<i class=""></i>
 								</div>
@@ -155,8 +155,8 @@
 						</div>
 					</div>
 					<div class="sb-sidenav-footer">
-						<div class="small">Logged in as:</div>
-						Start Bootstrap
+						<div class="small">Connecté en tant que :
+							{{ app.user.email }}</div>
 					</div>
 				</nav>
 			</div>

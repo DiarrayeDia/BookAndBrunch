@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class GenreType extends AbstractType
 {
@@ -17,7 +18,9 @@ class GenreType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => "Nom "
             ])
-            // ->add('books')
+            /*             ->add('books', TextareaType::class, [
+                'label' => "Livres"
+            ]) */
             ->add('Valider', SubmitType::class);
     }
 

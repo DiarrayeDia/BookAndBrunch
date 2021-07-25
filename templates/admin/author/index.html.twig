@@ -1,10 +1,10 @@
 {% extends 'admin/backoffice.html.twig' %}
 
-{% block title %}Gestion des Etagères
+{% block title %}Gestion des auteur.e.s
 {% endblock %}
 
 {% block body %}
-	<h1>Gestion des Etagères</h1>
+	<h1>Gestion des auteur.e.s</h1>
 	<main>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Tables</h1>
@@ -22,37 +22,43 @@
 				<div class="card-body">
 					<table id="datatablesSimple">
 						<div class="card-body">
-							<a href="{{ path('bookshelf_add') }}" class="btn btn-primary">Ajouter</a>
+							<a href="{{ path('author_add') }}" class="btn btn-primary">Ajouter</a>
 						</div>
 						<thead>
 							<tr>
-								<th>Année</th>
+								<th>Prénom</th>
+								<th>Nom</th>
+								<th>Pays</th>
+								<th>Biographie</th>
+								<th>Photo</th>
 								<th>Livres</th>
-								<th>Photos</th>
 								<th>Actions</th>
-
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Année</th>
+								<th>Prénom</th>
+								<th>Nom</th>
+								<th>Pays</th>
+								<th>Biographie</th>
+								<th>Photo</th>
 								<th>Livres</th>
-								<th>Photos</th>
 								<th>Actions</th>
-
 							</tr>
 						</tfoot>
 						<tbody>
 
-							{% for bookshelf in bookshelves %}
+							{% for author in authors %}
 								<tr>
-									<td>{{ bookshelf.year}}</td>
-									<td>{{ bookshelf.books}}</td>
-									<td>{{ bookshelf.photos}}</td>
-
+									<td>{{ author.firstname }}</td>
+									<td>{{ author.lastname }}</td>
+									<td>{{ author.country }}</td>
+									<td>{{ author.biography }}</td>
+									<td>{{ author.photo }}</td>
+									<td>Livres</td>
 									<td>
-										<a href="{{ path('bookshelf_update', {id: bookshelf.id}) }}" class="btn btn-primary">Modifier</a>
-										<a href="{{ path('bookshelf_delete', {id: bookshelf.id}) }}" class="btn btn-danger">Supprimer</a>
+										<a href="{{ path('author_update', {id: author.id}) }}" class="btn btn-primary">Modifier</a>
+										<a href="{{ path('author_delete', {id: author.id}) }}" class="btn btn-danger">Supprimer</a>
 									</td>
 								</tr>
 							{% endfor %}

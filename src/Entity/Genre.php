@@ -27,7 +27,7 @@ class Genre
     /**
      * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="genre")
      */
-    private $book;
+    private $books;
 
     public function __construct()
     {
