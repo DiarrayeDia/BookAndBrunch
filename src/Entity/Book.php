@@ -54,11 +54,7 @@ class Book
      */
     private $translation;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="book", cascade={"persist"})
-     * @ORM\JoinTable(name="book_author")
-     */
-    private $authors;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
@@ -80,12 +76,22 @@ class Book
      */
     private $areas;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="books")
+     */
+    private $authors;
+
     public function __construct()
     {
-        $this->authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->areas = new ArrayCollection();
+        $this->authors = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -158,29 +164,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection|Author[]
-     */
-    public function getAuthor(): Collection
-    {
-        return $this->authors;
-    }
-
-    public function addAuthor(Author $author): self
-    {
-        if (!$this->authors->contains($author)) {
-            $this->authors[] = $author;
-        }
-
-        return $this;
-    }
-
-    public function removeAuthor(Author $author): self
-    {
-        $this->authors->removeElement($author);
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comment[]
@@ -274,6 +257,30 @@ class Book
         if ($this->areas->removeElement($area)) {
             $area->removeBook($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Author[]
+     */
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(Author $author): self
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(Author $author): self
+    {
+        $this->authors->removeElement($author);
 
         return $this;
     }

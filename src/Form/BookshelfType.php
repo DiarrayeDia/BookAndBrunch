@@ -19,7 +19,7 @@ class BookshelfType extends AbstractType
                 'label' => "Saison"
             ])
             // ->add('month')
-            ->add('books')
+            // ->add('books')
             ->add('photos', FileType::class)
             ->add('Valider', SubmitType::class);
     }

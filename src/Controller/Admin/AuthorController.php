@@ -18,14 +18,14 @@ class AuthorController extends AbstractController
     public function index(AuthorRepository $authorRepository): Response
     {
         return $this->render('admin/author/index.html.twig', [
-            'authors' => $authorRepository->findAll(),
+            'authors' => $authorRepository->findAllwihBooks()
             // là on ne remplit pas une variable
         ]);
     }
 
 
     /**
-     * @Route("/author/add", name="author_add")
+     * @Route("admin/author/add", name="author_add")
      */
     public function addAuthor(Request $request): Response
     {
@@ -37,7 +37,7 @@ class AuthorController extends AbstractController
             $em->persist($author);
             $em->flush();
             $this->addFlash('success', 'Votre auteur.e a été ajouté.e avec succès !');
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('admin_index');
         }
         return $this->render('admin/author/add.html.twig', [
             'form' => $authorform->createView(),

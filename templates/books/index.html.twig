@@ -6,39 +6,40 @@
 	<div class="container px-4 px-lg-5">
 		<div class="row gx-4 gx-lg-5 justify-content-center">
 
-			<div
-				class="row">
-				{# {% for book in books %} #}
-				<div
-					class="col-4">
-					<!-- Post preview-->
-					<div class="card mb-3">
-						<h3 class="card-header">
-							Title</h3>
-						<div class="card-body">
-							<h5 class="card-title">Author</h5>
-							<h6 class="card-subtitle text-muted">year</h6>
-						</div>
+			<div class="row">
+				{% for book in books %}
+					<div
+						class="col-4">
+						<!-- Post preview-->
+						<div class="card mb-3">
+							<h3 class="card-header">
+								{{ book.title}}</h3>
+							<div class="card-body">
+								{% for author in books.author %}
+									<h5 class="card-title">{{ author.firstname}}</h5>
+								{% endfor %}
+								<h6 class="card-subtitle text-muted">{{ book.year}}</h6>
+							</div>
 
-						<img src="{{ asset('clean/covers/queenie.jpeg') }}"/>
+							<img src="{{ asset('clean/covers/queenie.jpeg') }}"/>
 
-						<div class="card-body">
-							<p class="card-text">Summary</p>
+							<div class="card-body">
+								<p class="card-text">{{ book.summary}}</p>
+							</div>
+							<div class="card-body">
+								<a href="{{path('book_view', {id: 28})}}" class="card-link">Card link</a>
+								<a href="#" class="card-link">Another link</a>
+							</div>
+							<div class="card-footer text-muted">
+								2 days ago
+							</div>
+							<!-- Divider-->
+
 						</div>
-						<div class="card-body">
-							<a href="{{path('book_view', {id: 28})}}" class="card-link">Card link</a>
-							<a href="#" class="card-link">Another link</a>
-						</div>
-						<div class="card-footer text-muted">
-							2 days ago
-						</div>
-						<!-- Divider-->
 
 					</div>
 
-				</div>
-
-				{# {% endfor %} #}
+				{% endfor %}
 			</div>
 			<!-- Pager-->
 			<div class="d-flex justify-content-end mb-4">

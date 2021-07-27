@@ -114,4 +114,8 @@ class Bookshelf
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->photos;
+    }
 }

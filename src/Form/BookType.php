@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,7 +44,9 @@ class BookType extends AbstractType
                     'Non' => false,
                 ], 'expanded' => true,]
             )
-            ->add('author', TextType::class, [
+            ->add('authors', EntityType::class, [
+                'class' => Author::class,
+                'multiple' => true,
                 'label' => "Auteur.e"
             ])
             ->add('bookshelf', IntegerType::class, [

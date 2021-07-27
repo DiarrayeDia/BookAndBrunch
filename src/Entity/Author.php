@@ -52,13 +52,18 @@ class Author
     private $photo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Book::class, mappedBy="author")
+     * @ORM\ManyToMany(targetEntity=Book::class, mappedBy="authors")
      */
     private $books;
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getFullname();
     }
 
     public function getId(): ?int
@@ -89,6 +94,13 @@ class Author
 
         return $this;
     }
+
+    public function getFullname()
+    {
+        return trim($this->getFirstname() . '' . $this->getLastname());
+    }
+
+
 
     public function getCountry(): ?string
     {
@@ -134,15 +146,15 @@ class Author
     /**
      * @return Collection|Book[]
      */
-    public function getBook(): Collection
+    public function getBooks(): Collection
     {
-        return $this->book;
+        return $this->books;
     }
 
     public function addBook(Book $book): self
     {
-        if (!$this->book->contains($book)) {
-            $this->book[] = $book;
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
             $book->addAuthor($this);
         }
 
@@ -151,7 +163,7 @@ class Author
 
     public function removeBook(Book $book): self
     {
-        if ($this->book->removeElement($book)) {
+        if ($this->books->removeElement($book)) {
             $book->removeAuthor($this);
         }
 

@@ -17,8 +17,8 @@ class BooksController extends AbstractController
      */
     public function home(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findAll();
-
+        $books = $bookRepository->findAllwithAuthors();
+        //dd($books);
         return $this->render('books/index.html.twig', [
             'books' => $books,
         ]);

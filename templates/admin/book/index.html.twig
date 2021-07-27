@@ -32,41 +32,72 @@
 								<th>Résumé</th>
 								<th>Couverture</th>
 								<th>Traduction</th>
-								<th>Bookshelf</th>
-								<th>Genre</th>
-								<th>Zone</th>
-								<th>Actions</th>
-							</tr>
+								{# <th>Bookshelf</th> #}
+								{# <th>Genre</th> #}
+								{# <th>Zone</th> #}
+									<th>
+								Actions
+							</th>
+						</tr>
 						</thead>
-						<tfoot>
-							<tr>
-								<th>Titre</th>
-								<th>Année</th>
-								<th>Auteur.e</th>
-								<th>Résumé</th>
-								<th>Couverture</th>
-								<th>Traduction</th>
-								<th>Bookshelf</th>
-								<th>Genre</th>
-								<th>Zone</th>
-								<th>Actions</th>
-							</tr>
-						</tfoot>
-						<tbody>
-
-							{% for book in books %}
+							<tfoot>
 								<tr>
-									<td>{{ book.title }}</td>
-									<td>{{ book.year}}</td>
-									<td>{{ book.author}}</td>
-									<td>{{ book.summary }}</td>
-									<td>{{ book.cover}}</td>
-									<td>{{ book.translation}}</td>
-									<td>{{ book.bookshelf}}</td>
-									<td>{{ book.genre}}</td>
-									<td>{{book.area}}</td>
-									<td>
-										<a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary">Modifier</a>
+									<th>
+								Titre
+								</th>
+									<th>
+								Année
+								</th>
+									<th>
+								Auteur.e
+								</th>
+									<th>
+								Résumé
+								</th>
+									<th>
+								Couverture
+								</th>
+									<th>
+								Traduction
+								</th>
+								{# <th>Bookshelf</th> #}
+								{# <th>Genre</th> #}
+								{# <th>Zone</th> #}
+									<th>
+								Actions
+							</th>
+						</tr>
+						</tfoot>
+							<tbody>
+
+								{% for book in books %}
+									<tr>
+										<td>
+									{{ book.title }}
+									</td>
+										<td>
+									{{ book.year}}
+									</td>
+
+										<td>
+											{% for author in book.authors %}
+										{{ author.firstname}}
+									{% endfor %}
+									</td>
+										<td>
+									{{ book.summary }}
+									</td>
+										<td>
+									{{ book.cover}}
+									</td>
+										<td>
+									{{ book.translation}}
+									</td>
+									{# <td>{{ book.bookshelf}}</td> #}
+									{# <td>{{ book.genre}}</td> #}
+									{# <td>{{book.area}}</td> #}
+										<td>
+											<a href="{{ path('book_update', {id: book.id}) }}" class="btn btn-primary"> Modifier</a>
 										<a href="{{ path('book_delete', {id: book.id}) }}" class="btn btn-danger">Supprimer</a>
 									</td>
 								</tr>

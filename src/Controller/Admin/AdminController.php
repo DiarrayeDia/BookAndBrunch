@@ -37,7 +37,7 @@ class AdminController extends AbstractController
             $em->persist($post);
             $em->flush();
             $this->addFlash('success', 'Votre post a été ajouté avec succès !');
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('admin_index');
         }
         return $this->render('admin/post/add.html.twig', [
             'form' => $postform->createView(),
@@ -57,7 +57,7 @@ class AdminController extends AbstractController
             $em->persist($event);
             $em->flush();
             $this->addFlash('success', 'Votre événement a été ajouté avec succès !');
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('admin_index');
         }
         return $this->render('admin/event/add.html.twig', [
             'form' => $eventform->createView(),
