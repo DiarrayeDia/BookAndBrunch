@@ -37,7 +37,7 @@ class AuthorController extends AbstractController
             $em->persist($author);
             $em->flush();
             $this->addFlash('success', 'Votre auteur.e a été ajouté.e avec succès !');
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('author_index');
         }
         return $this->render('admin/author/add.html.twig', [
             'form' => $authorform->createView(),

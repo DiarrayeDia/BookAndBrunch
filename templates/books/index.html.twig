@@ -16,7 +16,8 @@
 								{{ book.title}}</h3>
 							<div class="card-body">
 								{% for author in books.author %}
-									<h5 class="card-title">{{ author.firstname}}</h5>
+									<h5 class="card-title">{{ author.firstname}}
+										{{ author.lastname}}</h5>
 								{% endfor %}
 								<h6 class="card-subtitle text-muted">{{ book.year}}</h6>
 							</div>

@@ -63,7 +63,7 @@ class Author
 
     public function __toString()
     {
-        return $this->getFullname();
+        return $this->getFirstname();
     }
 
     public function getId(): ?int
@@ -97,9 +97,8 @@ class Author
 
     public function getFullname()
     {
-        return trim($this->getFirstname() . '' . $this->getLastname());
+        return trim($this->getFirstname() . ' ' . $this->getLastname());
     }
-
 
 
     public function getCountry(): ?string

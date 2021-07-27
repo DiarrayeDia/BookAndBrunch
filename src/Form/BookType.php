@@ -49,16 +49,16 @@ class BookType extends AbstractType
                 'multiple' => true,
                 'label' => "Auteur.e"
             ])
-            ->add('bookshelf', IntegerType::class, [
-                'label' => "Etagère"
-            ])
+            // ->add('bookshelf', IntegerType::class, [
+            //     'label' => "Etagère"
+            // ])
 
-            ->add('genres', TextType::class, [
-                'label' => "Genre"
-            ])
-            ->add('areas', TextType::class, [
+            // ->add('genres', TextType::class, [
+            //     'label' => "Genre"
+            // ])
+            /*     ->add('areas', TextType::class, [
                 'label' => "Continent / Région"
-            ])
+            ]) */
             ->add('Valider', SubmitType::class);
     }
 

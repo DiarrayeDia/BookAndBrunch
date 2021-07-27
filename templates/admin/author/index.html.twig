@@ -53,7 +53,7 @@
 									<td>{{ author.firstname }}</td>
 									<td>{{ author.lastname }}</td>
 									<td>{{ author.country }}</td>
-									<td>{{ author.biography }}</td>
+									<td>{{ author.biography | u.truncate(10, '...')}}</td>
 									<td>{{ author.photo }}</td>
 									<td>Livres</td>
 									<td>
