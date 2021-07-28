@@ -8,6 +8,7 @@
 
 			<div class="row">
 				{% for book in books %}
+					{# {{ dump(book) }} #}
 					<div
 						class="col-4">
 						<!-- Post preview-->
@@ -15,20 +16,20 @@
 							<h3 class="card-header">
 								{{ book.title}}</h3>
 							<div class="card-body">
-								{% for author in books.author %}
-									<h5 class="card-title">{{ author.firstname}}
-										{{ author.lastname}}</h5>
+								{% for authors in book.authors %}
+									<h5 class="card-title">{{ authors.fullname}}</h5>
 								{% endfor %}
 								<h6 class="card-subtitle text-muted">{{ book.year}}</h6>
 							</div>
 
-							<img src="{{ asset('clean/covers/queenie.jpeg') }}"/>
+
+							<img src="{{ asset('clean/covers/'~ book.cover)}}"/>
 
 							<div class="card-body">
-								<p class="card-text">{{ book.summary}}</p>
+								<p class="card-text">{{ book.summary | u.truncate(100, '...')}}</p>
 							</div>
 							<div class="card-body">
-								<a href="{{path('book_view', {id: 28})}}" class="card-link">Card link</a>
+								<a href="{{path('book_view', {slug: book.slug})}}" class="card-link">Card link</a>
 								<a href="#" class="card-link">Another link</a>
 							</div>
 							<div class="card-footer text-muted">

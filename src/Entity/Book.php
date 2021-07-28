@@ -45,7 +45,7 @@ class Book
     private $summary;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $cover;
 
@@ -67,12 +67,12 @@ class Book
     private $bookshelf;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="book")
+     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="books")
      */
     private $genres;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="book")
+     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="books")
      */
     private $areas;
 

@@ -2,11 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\Area;
 use App\Entity\Book;
+use App\Entity\Genre;
 use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,7 +34,18 @@ class BookType extends AbstractType
                 'label' => "Résumé du livre"
             ])
             ->add('cover', FileType::class, [
-                'label' => "Couverture du livre"
+                'label' => "Couverture du livre",
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Merci de choisir un format d\'images valide',
+                    ])
+                ],
             ])
             ->add(
                 'translation',
@@ -53,12 +67,16 @@ class BookType extends AbstractType
             //     'label' => "Etagère"
             // ])
 
-            // ->add('genres', TextType::class, [
-            //     'label' => "Genre"
-            // ])
-            /*     ->add('areas', TextType::class, [
+            ->add('genres', EntityType::class, [
+                'class' => Genre::class,
+                'multiple' => true,
+                'label' => "Genre"
+            ])
+            ->add('areas', EntityType::class, [
+                'class' => Area::class,
+                'multiple' => true,
                 'label' => "Continent / Région"
-            ]) */
+            ])
             ->add('Valider', SubmitType::class);
     }
 

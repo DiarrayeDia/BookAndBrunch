@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BooksController extends AbstractController
 {
@@ -25,12 +27,16 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
+     * ---@Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/book/{slug}", name="book_view", methods={"GET"})
      */
-    public function book_view($id): Response
+    public function book_view(BookRepository $bookRepository): Response
+
     {
+        $books = $bookRepository->findAllwithCategories();
+        //dd($books);
         return $this->render('books/book_view.html.twig', [
-            'controller_name' => 'BooksController',
+            'books' => $books,
         ]);
     }
     // Book management in the back office 
@@ -40,8 +46,9 @@ class BooksController extends AbstractController
      */
     public function index(BookRepository $bookRepository): Response
     {
+        //dd($books);
         return $this->render('admin/book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $bookRepository->findAllwithCategories(),
             // là on ne remplit pas une variable
         ]);
     }
@@ -49,12 +56,28 @@ class BooksController extends AbstractController
     /**
      * @Route("/admin/book/add", name="book_add")
      */
-    public function addBook(Request $request): Response
+    public function addBook(Request $request, SluggerInterface $slugger): Response
     {
         $book = new Book();
         $bookform = $this->createForm(BookType::class, $book);
         $bookform->handleRequest($request);
         if ($bookform->isSubmitted() && $bookform->isValid()) {
+
+            $coverFile = $bookform->get('cover')->getData();
+            if ($coverFile) {
+                $originalFilename = pathinfo($coverFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $coverFile->guessExtension();
+
+                try {
+                    $coverFile->move(
+                        $this->getParameter('covers_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+                $book->setCover($newFilename);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($book);
             $em->flush();

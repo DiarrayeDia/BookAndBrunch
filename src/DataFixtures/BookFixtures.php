@@ -3,17 +3,17 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Books;
+use App\Entity\Book;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class BooksFixtures extends Fixture
+class BookFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
         for ($nbBooks = 1; $nbBooks < 6; $nbBooks++) {
-            $book = new Books();
+            $book = new Book();
             $book->setTitle($faker->realText(25));
             $book->setYear($faker->year);
             $book->setSummary($faker->text(500));
