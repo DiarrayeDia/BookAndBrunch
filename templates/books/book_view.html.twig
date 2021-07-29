@@ -9,37 +9,59 @@
 
 {% block body %}
 	<!-- Sidebar -->
-	<div class="col-lg-4 col-md-4 mx-auto">
-		<h2>Quelques suggestions similaires...</h2>
+	<div class="card border-success mb-3 ml-3" style="max-width: 20rem;">
+		<div class="card-header">Quelques suggestions qui pourraient vous plaire...</div>
+		<div class="card-body">
 
-		{% for book in books %}
-			{# {{ dump(book) }} #}
-			<div class="post-preview">
-				<a href="{{ path('book_view', {slug: book.slug}) }}">
-					<h2 class="post-subtitle">{{ book.title }}</h2>
-				</a>
-			</div>
-		{% endfor %}
+			<p class="card-text">
+				{% for book in books %}
 
+					{% for genres in book.genres %}
+
+						<div class="post-preview">
+							<a href="{{ path('book_view', {slug: book.slug}) }}">
+								<h2 class="post-subtitle">
+									-{{ book.title }}</h2>
+							</a>
+						</div>
+					{% endfor %}
+				{% endfor %}
+			</p>
+		</div>
 	</div>
+	{# 	<div class="col-md-12 col-lg-3 col-xr-3">
+										<h2>Quelques suggestions qui pourraient vous plaire...</h2>
+								
+										{% for book in books %}
+											
+											{% for genres in book.genres %}
+								
+												<div class="post-preview">
+													<a href="{{ path('book_view', {slug: book.slug}) }}">
+														<h2 class="post-subtitle">{{ book.title }}</h2>
+													</a>
+												</div>
+											{% endfor %}
+										{% endfor %}
+								
+									</div> #}
+
 	<!-- Post Content-->
-	{% for book in books %}
-		<article class="mb-4">
-			<div class="container px-4 px-lg-5">
-				<div class="row gx-4 gx-lg-5 justify-content-center">
-					<div class="col-md-10 col-lg-8 col-xl-7">
-						<h2 class="section-heading">{{ book.title}}
-						</h2>
-						<p>{{ book.summary}}</p>
-						<p>
-							Placeholder text by
-							<a href="http://spaceipsum.com/">Space Ipsum</a>
-							&middot; Images by
-							<a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>
-						</p>
-					</div>
-				</div>
+	<article
+		class="mb-4">
+		{# <div class="container px-8 px-lg-5"> #}
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<h2 class="section-heading">{{ book.title}}
+				</h2>
+				<p>{{ book.summary}}</p>
+				<p>
+					Placeholder text by
+					<a href="http://spaceipsum.com/">Space Ipsum</a>
+					&middot; Images by
+					<a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>
+				</p>
 			</div>
-		</article>
-	{% endfor %}
-{% endblock %}
+		</div>
+	</div>
+</article>{% endblock %}

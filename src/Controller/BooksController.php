@@ -30,13 +30,14 @@ class BooksController extends AbstractController
      * ---@Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
      * @Route("/book/{slug}", name="book_view", methods={"GET"})
      */
-    public function book_view(BookRepository $bookRepository): Response
+    public function book_view(BookRepository $bookRepository, Book $book): Response
 
     {
         $books = $bookRepository->findAllwithCategories();
         //dd($books);
         return $this->render('books/book_view.html.twig', [
             'books' => $books,
+            'book' => $book,
         ]);
     }
 
