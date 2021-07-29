@@ -13,6 +13,7 @@
 		<h2>Quelques suggestions similaires...</h2>
 
 		{% for book in books %}
+			{# {{ dump(book) }} #}
 			<div class="post-preview">
 				<a href="{{ path('book_view', {slug: book.slug}) }}">
 					<h2 class="post-subtitle">{{ book.title }}</h2>

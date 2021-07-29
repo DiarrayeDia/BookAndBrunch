@@ -67,12 +67,12 @@ class Book
     private $bookshelf;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="books")
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="books")
      */
     private $genres;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Area::class, mappedBy="books")
+     * @ORM\ManyToMany(targetEntity=Area::class, inversedBy="books")
      */
     private $areas;
 

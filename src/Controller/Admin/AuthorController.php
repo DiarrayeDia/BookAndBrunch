@@ -8,7 +8,9 @@ use App\Repository\AuthorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AuthorController extends AbstractController
 {
@@ -27,12 +29,28 @@ class AuthorController extends AbstractController
     /**
      * @Route("admin/author/add", name="author_add")
      */
-    public function addAuthor(Request $request): Response
+    public function addAuthor(Request $request, SluggerInterface $slugger): Response
     {
         $author = new Author();
         $authorform = $this->createForm(AuthorType::class, $author);
         $authorform->handleRequest($request);
         if ($authorform->isSubmitted() && $authorform->isValid()) {
+
+            $photoFile = $authorform->get('photo')->getData();
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+
+                try {
+                    $photoFile->move(
+                        $this->getParameter('authors_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+                $author->setPhoto($newFilename);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($author);
             $em->flush();

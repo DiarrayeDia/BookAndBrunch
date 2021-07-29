@@ -39,7 +39,10 @@ class BooksController extends AbstractController
             'books' => $books,
         ]);
     }
-    // Book management in the back office 
+
+
+    // --------------Book management in the back office --------------
+
 
     /**
      * @Route("/admin/book", name="book_index")

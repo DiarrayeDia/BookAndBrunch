@@ -8,13 +8,13 @@
 
 			<div class="row">
 				{% for book in books %}
-					{# {{ dump(book) }} #}
 					<div
 						class="col-4">
 						<!-- Post preview-->
 						<div class="card mb-3">
 							<h3 class="card-header">
 								{{ book.title}}</h3>
+							{{ dump(book) }}
 							<div class="card-body">
 								{% for authors in book.authors %}
 									<h5 class="card-title">{{ authors.fullname}}</h5>

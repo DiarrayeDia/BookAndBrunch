@@ -42,7 +42,7 @@ class Area
     private $areas;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="areas")
+     * @ORM\ManyToMany(targetEntity=Book::class, mappedBy="areas")
      */
     private $books;
 
@@ -121,7 +121,7 @@ class Area
     }
 
     /**
-     * @return Collection|Books[]
+     * @return Collection|Book[]
      */
     public function getBooks(): Collection
     {
