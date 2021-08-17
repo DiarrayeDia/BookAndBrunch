@@ -26,7 +26,7 @@ class CommentController extends AbstractController
 
 
     /**
-     * @Route("/comment/add", name="comment_add")
+     * @Route("comment/add", name="comment_modal")
      */
     public function addComment(Request $request): Response
     {
@@ -38,9 +38,9 @@ class CommentController extends AbstractController
             $em->persist($comment);
             $em->flush();
             $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
-            return $this->redirectToRoute('book_view');
+            return $this->redirectToRoute('comment_modal');
         }
-        return $this->render('admin/comment/add.html.twig', [
+        return $this->render('comment/modal.html.twig', [
             'form' => $commentform->createView(),
         ]);
     }

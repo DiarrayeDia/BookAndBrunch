@@ -29,6 +29,11 @@ class Comment
     private $content;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nickname;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -43,6 +48,16 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comment")
      */
     private $post;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+    
+    public function __toString()
+    {
+        return $this->nickname;
+    }
 
     public function getId(): ?int
     {
@@ -72,6 +87,19 @@ class Comment
 
         return $this;
     }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
 
     public function getWrittenBy(): ?User
     {
@@ -108,4 +136,17 @@ class Comment
 
         return $this;
     }
+
+    public function getisPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setisPublished(?bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
 }

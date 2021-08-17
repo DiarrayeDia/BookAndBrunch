@@ -26,21 +26,25 @@
 						</div>
 						<thead>
 							<tr>
-								<th>Id</th>
+								<th>Date</th>
+								<th>Livre commenté</th>
+								<th>Post commenté</th>
 								<th>Auteur Email</th>
-								<th>Auteur pseudo</th>
+								<th>Auteur Pseudo</th>
 								<th>Contenu</th>
-								<th>Commentaire parent</th>
+								<th>Publier</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Id</th>
+								<th>Date</th>
+								<th>Livre commenté</th>
+								<th>Post commenté</th>
 								<th>Auteur Email</th>
-								<th>Auteur pseudo</th>
+								<th>Auteur Pseudo</th>
 								<th>Contenu</th>
-								<th>Commentaire parent</th>
+								<th>Publier</th>
 								<th>Actions</th>
 							</tr>
 						</tfoot>
@@ -48,11 +52,13 @@
 
 							{% for comment in comments %}
 								<tr>
-									<td>{{ comment.id }}</td>
+									<td>{{ comment.createdAt|date('d-m-Y H:i') }}</td>
+									<td>{{ comment.book }}</td>
+									<td>{{ comment.post }}</td>
 									<td>{{ comment.writtenby }}</td>
-									<td>nick</td>
+									<td>{{ comment.nickname }}</td>
 									<td>{{ comment.content }}</td>
-									<td>parent</td>
+									<td>{{ comment.isPublished}}</td>
 									<td>
 										<a href="{{ path('comment_update', {id: comment.id}) }}" class="btn btn-primary">Modifier</a>
 										<a href="{{ path('comment_delete', {id: comment.id}) }}" class="btn btn-danger">Supprimer</a>

@@ -31,7 +31,7 @@ class BooksController extends AbstractController
 
     /**
      * ---@Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
-     * @Route("/book/{slug}", name="book_view", methods={"GET"})
+     * @Route("/book/{slug}", name="book_view")
      */
     public function book_view(BookRepository $bookRepository, Book $book, Request $request, CommentService $commentService): Response
 
