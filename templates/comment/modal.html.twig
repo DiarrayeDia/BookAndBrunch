@@ -1,0 +1,69 @@
+{% block body %}
+	
+	<!-- Button trigger modal  -->
+	<p>
+		<a href="#" role="button" data-target="#modal" data-toggle="modal">Ouvrir la modal</a>
+			<div class="modal-wrapper">
+				<div id= "modal" class="modal fade" role="dialog" aria-labelledby= "titlemodal" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-close" data-dismiss="dialog">X</div>
+								<div class="modal-header">
+									<h5 class="modal-title" id="titlemodal">Laisser un commentaire </h5>
+								</div>
+								<div class="modal-body">
+									{form(form)}}
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn btn-close" role="button" data-dismiss="dialog">Fermer</a>
+									<a href="#" class="btn" role="button">Valider</a>
+								</div>
+									
+						</div>
+					</div>
+				</div>
+			</div>
+	</p>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		window.onload = () => {
+    // On récupère tous les boutons d'ouverture de modale
+			const modalButtons = document.querySelectorAll("[data-toggle=modal]");
+			
+			for(let button of modalButtons){
+				button.addEventListener("click", function(e){
+					// On empêche la navigation
+					e.preventDefault();
+					// On récupère le data-target
+					let target = this.dataset.target
+					
+					// On récupère la bonne modale
+					let modal = document.querySelector(target);
+					// On affiche la modale
+					modal.classList.add("show");
+
+					// On récupère les boutons de fermeture
+					const modalClose = modal.querySelectorAll("[data-dismiss=dialog]");
+					
+					for(let close of modalClose){
+						close.addEventListener("click", () => {
+							modal.classList.remove("show");
+						});
+					}
+
+					// On gère la fermeture lors du clic sur la zone grise
+					modal.addEventListener("click", function(){
+						this.classList.remove("show");
+					});
+					// On évite la propagation du clic d'un enfant à son parent
+					modal.children[0].addEventListener("click", function(e){
+						e.stopPropagation();
+					})
+				});
+			}
+
+		}
+    </script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'admin/backoffice.html.twig' %}
+
+{% block title %}Gestion des commentaires
+{% endblock %}
+
+{% block body %}
+	<h1>Gestion des commentaires</h1>
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4">Tables</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">
+					<a href="{{path('admin_index')}}">Dashboard</a>
+				</li>
+				<li class="breadcrumb-item active">Tables</li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i>
+					DataTable Example
+				</div>
+				<div class="card-body">
+					<table id="datatablesSimple">
+						<div class="card-body">
+							<a href="{{ path('comment_add') }}" class="btn btn-primary">Ajouter</a>
+						</div>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Auteur Email</th>
+								<th>Auteur pseudo</th>
+								<th>Contenu</th>
+								<th>Commentaire parent</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Id</th>
+								<th>Auteur Email</th>
+								<th>Auteur pseudo</th>
+								<th>Contenu</th>
+								<th>Commentaire parent</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+						<tbody>
+
+							{% for comment in comments %}
+								<tr>
+									<td>{{ comment.id }}</td>
+									<td>{{ comment.writtenby }}</td>
+									<td>nick</td>
+									<td>{{ comment.content }}</td>
+									<td>parent</td>
+									<td>
+										<a href="{{ path('comment_update', {id: comment.id}) }}" class="btn btn-primary">Modifier</a>
+										<a href="{{ path('comment_delete', {id: comment.id}) }}" class="btn btn-danger">Supprimer</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+{% block javascripts %}{% endblock %}

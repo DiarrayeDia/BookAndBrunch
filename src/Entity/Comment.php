@@ -21,7 +21,7 @@ class Comment
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="text")
@@ -29,34 +29,34 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $written_by;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="comment")
+     * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="comments")
      */
     private $book;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comment")
      */
-    private $posts;
+    private $post;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->createdAt;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->date = $date;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

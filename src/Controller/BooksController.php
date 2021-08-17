@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Comment;
 use App\Form\BookType;
+use App\Form\CommentType;
 use App\Repository\BookRepository;
+use App\Service\CommentService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,14 +33,26 @@ class BooksController extends AbstractController
      * ---@Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
      * @Route("/book/{slug}", name="book_view", methods={"GET"})
      */
-    public function book_view(BookRepository $bookRepository, Book $book): Response
+    public function book_view(BookRepository $bookRepository, Book $book, Request $request, CommentService $commentService): Response
 
     {
         $books = $bookRepository->findAllwithCategories();
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $commentService->persistComment($comment, $book, null);
+
+
+            return $this->redirectToRoute('book_view', ['slug'=> $book->getSlug()]);
+        }
         //dd($books);
         return $this->render('books/book_view.html.twig', [
             'books' => $books,
             'book' => $book,
+            'form'=> $form->createView(),
         ]);
     }
 

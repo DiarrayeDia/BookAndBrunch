@@ -59,7 +59,7 @@ class Book
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
      */
-    private $comment;
+    private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity=Bookshelf::class, inversedBy="book")
