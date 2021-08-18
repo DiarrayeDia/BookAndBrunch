@@ -26,7 +26,7 @@ class CommentController extends AbstractController
 
 
     /**
-     * @Route("comment/add", name="comment_modal")
+     * @Route("/admin/comment/publish", name="comment_publish")
      */
     public function addComment(Request $request): Response
     {
@@ -38,31 +38,13 @@ class CommentController extends AbstractController
             $em->persist($comment);
             $em->flush();
             $this->addFlash('success', 'Votre commentaire a été ajouté avec succès !');
-            return $this->redirectToRoute('comment_modal');
+            return $this->redirectToRoute('comment_publish');
         }
-        return $this->render('comment/modal.html.twig', [
+        return $this->render('admin/comment/validate.html.twig', [
             'form' => $commentform->createView(),
         ]);
     }
 
-    /**
-     * @Route("/admin/comment/update/{id}", name="comment_update", requirements={"id"="\d+"})
-     */
-    public function updateComment(Comment $comment, Request $request): Response
-    {
-        $commentform = $this->createForm(CommentType::class, $comment);
-        $commentform->handleRequest($request);
-        if ($commentform->isSubmitted() && $commentform->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
-            $this->addFlash('success', 'Votre commentaire a été modifiée avec succès !');
-            return $this->redirectToRoute('comment_index');
-        }
-        return $this->render('admin/comment/add.html.twig', [
-            'form' => $commentform->createView(),
-        ]);
-    }
 
     /**
      * @Route("/admin/comment/delete/{id}", name="comment_delete", requirements={"id"="\d+"})

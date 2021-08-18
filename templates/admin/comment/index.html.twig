@@ -22,7 +22,7 @@
 				<div class="card-body">
 					<table id="datatablesSimple">
 						<div class="card-body">
-							<a href="{{ path('comment_add') }}" class="btn btn-primary">Ajouter</a>
+							<a href="{{ path('comment_publish') }}" class="btn btn-primary">Ajouter</a>
 						</div>
 						<thead>
 							<tr>
@@ -55,12 +55,11 @@
 									<td>{{ comment.createdAt|date('d-m-Y H:i') }}</td>
 									<td>{{ comment.book }}</td>
 									<td>{{ comment.post }}</td>
-									<td>{{ comment.writtenby }}</td>
+									<td>{{ app.user.email }}</td>
 									<td>{{ comment.nickname }}</td>
 									<td>{{ comment.content }}</td>
 									<td>{{ comment.isPublished}}</td>
 									<td>
-										<a href="{{ path('comment_update', {id: comment.id}) }}" class="btn btn-primary">Modifier</a>
 										<a href="{{ path('comment_delete', {id: comment.id}) }}" class="btn btn-danger">Supprimer</a>
 									</td>
 								</tr>
