@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Post;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -19,6 +20,7 @@ class Comment
     private $id;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -37,15 +39,17 @@ class Comment
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $written_by;
+    private $writtenBy;
 
     /**
      * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $book;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comment")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $post;
 
@@ -69,12 +73,6 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
 
     public function getContent(): ?string
     {
@@ -103,12 +101,12 @@ class Comment
 
     public function getWrittenBy(): ?User
     {
-        return $this->written_by;
+        return $this->writtenBy;
     }
 
-    public function setWrittenBy(?User $written_by): self
+    public function setWrittenBy(?User $writtenBy): self
     {
-        $this->written_by = $written_by;
+        $this->writtenBy = $writtenBy;
 
         return $this;
     }

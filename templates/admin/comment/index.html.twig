@@ -1,10 +1,10 @@
 {% extends 'admin/backoffice.html.twig' %}
 
-{% block title %}Gestion des commentaires
+{% block title %}Commentaires publiés
 {% endblock %}
 
 {% block body %}
-	<h1>Gestion des commentaires</h1>
+	<h1>Commentaires publiés</h1>
 	<main>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Tables</h1>
@@ -21,9 +21,6 @@
 				</div>
 				<div class="card-body">
 					<table id="datatablesSimple">
-						<div class="card-body">
-							<a href="{{ path('comment_publish') }}" class="btn btn-primary">Ajouter</a>
-						</div>
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -55,20 +52,77 @@
 									<td>{{ comment.createdAt|date('d-m-Y H:i') }}</td>
 									<td>{{ comment.book }}</td>
 									<td>{{ comment.post }}</td>
-									<td>{{ app.user.email }}</td>
+									<td>{{ comment.writtenBy }}</td>
 									<td>{{ comment.nickname }}</td>
 									<td>{{ comment.content }}</td>
-									<td>{{ comment.isPublished}}</td>
 									<td>
-										<a href="{{ path('comment_delete', {id: comment.id}) }}" class="btn btn-danger">Supprimer</a>
+									    <div class="form-check form-switch">
+                							<input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ comment.id }}" data-id="{{ comment.id }}" {{ comment.isPublished ? 'checked' : null}}>
+            							</div>
+									</td>
+									<td>
+										<a href="" class="btn btn-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ comment.id }}" data-title="{{ comment.id }}">Supprimer</a>
+														
+										<!-- Modal -->
+										<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Supprimer un commentaire</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													...
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+													<a href="" class="btn btn-primary">Supprimer</a>
+												</div>
+												</div>
+											</div>
+										</div>
 									</td>
 								</tr>
 							{% endfor %}
 						</tbody>
 					</table>
+
+
+
 				</div>
 			</div>
 		</div>
 	</main>
+
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+			            //console.log("Load !!!!")
+            let activate = document.querySelectorAll("[type=checkbox]")
+            //console.log(activate)
+            for(let button of activate) {
+                console.log(button)
+                button.addEventListener("click", function(){
+                    alert("Click")
+                    let xmlhttp = new XMLHttpRequest
+                    console.log(this.dataset.id)
+                    xmlhttp.open("get", `/admin/comment/publish/${this.dataset.id}`)
+                    xmlhttp.send()
+                })
+            }
+
+			let btdeletes = document.querySelectorAll(".modal-trigger")
+			for(let btdelete of btdeletes) {
+				btdelete.addEventListener("click", function(){
+					document.querySelector(".modal-footer a").href=`/admin/comment/delete/${this.dataset.id}`
+					document.querySelector(".modal-body").innerText = `Etes-vous sûr de vouloir supprimer le commentaire "${this.dataset.title}"`
+        		})
+    		}
+        }
+	</script>
 {% endblock %}
-{% block javascripts %}{% endblock %}
+
+{% endblock %}
+
+

@@ -45,7 +45,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="written_by")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="writtenBy")
      */
     private $comments;
 

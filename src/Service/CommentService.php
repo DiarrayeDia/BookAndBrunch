@@ -23,7 +23,9 @@ class CommentService
     {
         $comment->setBook($book)
                 ->setPost($post)
-                ->setCreatedAt(new DateTime());
+                ->setisPublished(false)
+                ->setCreatedAt(new DateTime('now'));
+                
         
                 $this->manager->persist($comment);
                 $this->manager->flush();

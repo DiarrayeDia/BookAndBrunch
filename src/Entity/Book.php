@@ -55,7 +55,6 @@ class Book
     private $translation;
 
 
-
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
      */
@@ -168,9 +167,9 @@ class Book
     /**
      * @return Collection|Comment[]
      */
-    public function getComment(): Collection
+    public function getComments(): Collection
     {
-        return $this->comment;
+        return $this->comments;
     }
 
     public function addComment(Comment $comment): self

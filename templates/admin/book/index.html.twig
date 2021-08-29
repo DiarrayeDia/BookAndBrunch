@@ -56,27 +56,17 @@
 
 							{% for book in books %}
 								<tr>
-									<td>
-										{{ book.title }}
-									</td>
-									<td>
-										{{ book.year}}
-									</td>
+									<td>{{ book.title }}</td>
+									<td>{{ book.year}}</td>
 
 									<td>
 										{% for author in book.authors %}
 											{{ author.fullname}}
 										{% endfor %}
 									</td>
-									<td>
-										{{ book.summary }}
-									</td>
-									<td>
-										{{ book.cover}}
-									</td>
-									<td>
-										{{ book.translation}}
-									</td>
+									<td>{{ book.summary }}</td>
+									<td>{{ book.cover}}</td>
+									<td>{{ book.translation}}</td>
 									{# <td>{{ book.bookshelf}}</td> #}
 
 									<td>
@@ -103,4 +93,3 @@
 		</div>
 	</main>
 {% endblock %}
-{% block javascripts %}{% endblock %}

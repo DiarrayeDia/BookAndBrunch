@@ -2,21 +2,31 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Book;
-use App\Entity\Comment;
 use App\Form\BookType;
+use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Repository\BookRepository;
 use App\Service\CommentService;
+use App\Repository\BookRepository;
+use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BooksController extends AbstractController
 {
+    private $security;
+    
+    public function __construct(Security $security)
+    {
+        $this->security =$security;
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -33,26 +43,33 @@ class BooksController extends AbstractController
      * ---@Route("/book/{id}", name="book_view", methods={"GET"}, requirements={"id"="\d+"})
      * @Route("/book/{slug}", name="book_view")
      */
-    public function book_view(BookRepository $bookRepository, Book $book, Request $request, CommentService $commentService): Response
+    public function book_view(BookRepository $bookRepository, Book $book, Request $request, CommentRepository $commentRepository): Response
 
     {
         $books = $bookRepository->findAllwithCategories();
         $comment = new Comment();
+        $currentUser = $this->security->getUser();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
-            $commentService->persistComment($comment, $book, null);
-
-
-            return $this->redirectToRoute('book_view', ['slug'=> $book->getSlug()]);
+            $comment->setWrittenBy($currentUser);
+            $comment->setBook($book);
+            $comment->setisPublished(false);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre commentaire a bien été soumis, il sera publié après validation!');
+            return $this->redirectToRoute('book_view', ['slug' => $book->getSlug()]);
         }
-        //dd($books);
+        // dd($comment);
         return $this->render('books/book_view.html.twig', [
             'books' => $books,
             'book' => $book,
             'form'=> $form->createView(),
+            
+            
         ]);
     }
 
@@ -135,7 +152,7 @@ class BooksController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($book);
         $em->flush();
-        $this->addFlash('success', 'Cette zone a été supprimée !');
+        $this->addFlash('success', 'Ce livre a été supprimé !');
         return $this->redirectToRoute('book_index');
     }
 }
